@@ -5,7 +5,6 @@ import requests
 from urllib import request, response
 from django.shortcuts import redirect, render
 from django.contrib import auth
-from django.http import HttpResponse
 
 
 

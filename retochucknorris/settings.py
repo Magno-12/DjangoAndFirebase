@@ -84,7 +84,7 @@ WSGI_APPLICATION = 'retochucknorris.wsgi.application'
 
 DATABASES = {
     'default': dj_database_url.config(
-        default = 'postgresql://postgres:postgres@localhost/protgres',
+        default = 'https://logindjangoprueba-default-rtdb.firebaseio.com',
         conn_max_age=600
     )
 
