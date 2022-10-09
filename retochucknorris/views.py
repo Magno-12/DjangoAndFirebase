@@ -10,15 +10,15 @@ from django.http import HttpResponse
 
 
 config={
-    'apiKey' : "",
-    'authDomain' : "",
-    'projectId' : "",
-    'storageBucket' : "",
-    'messagingSenderId' : "",
-    'appId' : "",
-    'measurementId' : "",
-    'databaseURL' : "",
-    "projectId": ""
+    'apiKey' : "AIzaSyD_6AVv3DvM6KfrKBnQJgqdyiR4otSDuQ0",
+    'authDomain' : "logindjangoprueba.firebaseapp.com",
+    'projectId' : "logindjangoprueba",
+    'storageBucket' : "logindjangoprueba.appspot.com",
+    'messagingSenderId' : "791591105335",
+    'appId' : "1:791591105335:web:b71a9d2e8121b7717e20b2",
+    'measurementId' : "G-HKL2L0NL1S",
+    'databaseURL' : "https://logindjangoprueba-default-rtdb.firebaseio.com",
+    "projectId": "logindjangoprueba"
 }
 firebase = pyrebase.initialize_app(config)
 auth2 = firebase.auth()
