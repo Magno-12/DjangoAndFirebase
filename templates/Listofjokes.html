@@ -1,0 +1,34 @@
+{% extends "./base.html" %}
+
+{% block title %} Admin Of Jokes {% endblock %}
+
+{% block body %}
+
+<div class="row">
+    <div class="col-sm-12 col-md-6 col-lg-8 col-xl-8">
+        <h1>Phrases</h1>
+        <div class="table-responsive py-2">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Jokes</th>
+                        <th colspan="1">Options</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for p in phrase.values %}
+                    <tr>
+                        <td>{{p.phrase}}</td>
+                        <form action="/ButtonDelete/" method="delete">
+                            <td><a href="/ButtonDelete/{{p.id}}" class="btn btn-danger btnEliminacion">Delete</a>
+                            </td>
+                    </tr>
+                    </form>
+                    {% csrf_token %}
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
