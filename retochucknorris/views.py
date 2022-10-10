@@ -38,7 +38,6 @@ def button(request):
 def buttonFav(request):
     value = request.GET.get("phrase")
     uid = request.GET.get("uid")
-    print(uid)
     supabase.table("phrases").insert({"phrase":value, "user_id":uid}).execute()
     return render(request, "jokes.html")
 
@@ -54,11 +53,11 @@ def postsignIn(request):
     passw=request.POST.get('pass')
     try:
         user = supabase.auth.sign_up(email = email, password=passw)
-        print(user)
+        print('Value',user.id)
+        return render(request,"jokes.html", {"email":email, "uid":user.id})
     except:
-        message2="Invalid Credentials!!Please Check your Data"
         return render(request,"Login.html")
-    return render(request,"jokes.html", {"email":email, "uid":user.id})
+
 
 def list_Of_Jokes(request):
 

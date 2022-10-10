@@ -15,11 +15,12 @@
             {{jokes}}
             <hr>
         </centre>
-        <form action="/ButtonFav/" method="post">
+        <form action="/ButtonFav/{{uid}}" method="post">
             <centre>
                 <a class="btn btn-info btnEliminacion" alt="Fav Joke" href="/buttonFav?phrase={{ jokes|urlencode }}&uid={{ uid|urlencode }}"
                     style="font-size: 1.5em">Fav
                     Joke</a>
+                    <hr>
             </centre>
         </form>
     </div>
