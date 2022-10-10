@@ -27,6 +27,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY', default='your secret key')
 
 
+DATABASES = {
+    'default': dj_database_url.config(
+             default='postgresql://postgres:M1234567891*Magno@db.vjvkzcmihnvzopcxzsme.supabase.co:5432/postgres',
+                     conn_max_age=600
+    )}
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = 'RENDER' not in os.environ
 
