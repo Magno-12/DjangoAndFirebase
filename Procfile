@@ -1,1 +1,0 @@
-web: retochucknorris.wsgi --log-file -
