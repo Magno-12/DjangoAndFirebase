@@ -31,6 +31,5 @@ urlpatterns = [
     path(r'list_Of_Jokes/', views.list_Of_Jokes),
     path(r'ButtonDelete/<str:id>', views.ButtonDelete),
     path('logout/', views.logout, name="log"),
-  + static(settings.STATIC_URL, document_root = settings.STATIC_ROOT)
 ]
 

@@ -1,28 +1,23 @@
 import re
 import json
+import os
+from psycopg2 import Date
 import pyrebase
 import requests
 from urllib import request, response
 from django.shortcuts import redirect, render
 from django.contrib import auth
+from supabase import create_client, Client
 
 
+url_api = "https://api.chucknorris.io/jokes/random"
+user = None
 
-config={
-    'apiKey' : "AIzaSyD_6AVv3DvM6KfrKBnQJgqdyiR4otSDuQ0",
-    'authDomain' : "logindjangoprueba.firebaseapp.com",
-    'projectId' : "logindjangoprueba",
-    'storageBucket' : "logindjangoprueba.appspot.com",
-    'messagingSenderId' : "791591105335",
-    'appId' : "1:791591105335:web:b71a9d2e8121b7717e20b2",
-    'measurementId' : "G-HKL2L0NL1S",
-    'databaseURL' : "https://logindjangoprueba-default-rtdb.firebaseio.com",
-    "projectId": "logindjangoprueba"
-}
-firebase = pyrebase.initialize_app(config)
-auth2 = firebase.auth()
-database=firebase.database()
-url = "https://api.chucknorris.io/jokes/random"
+url: str = "https://vjvkzcmihnvzopcxzsme.supabase.co"
+print(url)
+key: str = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZqdmt6Y21paG52em9wY3h6c21lIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NjUzNzAxMzIsImV4cCI6MTk4MDk0NjEzMn0.LH6Y3TO-X-bqAroLq0y_45FVMmCLXA54GfwAlSG-XkA"
+print(key)
+supabase: Client = create_client(supabase_url = url, supabase_key = key)
 
 def signIn(request):
     return render(request,"Login.html")
@@ -35,20 +30,21 @@ def logout(request):
     return render(request,"Login.html")
 
 def button(request):
-    response = requests.get(url)
+    response = requests.get(url_api)
     jokes = response.json()["value"]
     print(jokes)
     return render(request, "jokes.html",{'jokes':jokes})
 
 def buttonFav(request):
-    query = request.GET.get("phrase")
-    key = database.generate_key()
-    database.child("phrase").child(key).set({'phrase':query, 'id':key})
+    value = request.GET.get("phrase")
+    uid = request.GET.get("uid")
+    print(uid)
+    supabase.table("phrases").insert({"phrase":value, "user_id":uid}).execute()
     return render(request, "jokes.html")
 
 def ButtonDelete(request, id):
     print(id)
-    database.child('phrase').child(id).remove()
+    supabase.table("phrases").delete().eq("id",id).execute()
 
     return redirect('/list_Of_Jokes')
 
@@ -57,21 +53,15 @@ def postsignIn(request):
     email=request.POST.get('email')
     passw=request.POST.get('pass')
     try:
-
-        user = auth2.sign_in_with_email_and_password(email,passw)
-    except:
+        user = supabase.auth.sign_up(email = email, password=passw)
         print(user)
+    except:
         message2="Invalid Credentials!!Please Check your Data"
         return render(request,"Login.html")
-    session_id=user['idToken']
-    request.session['uid']=str(session_id)
-    return render(request,"jokes.html", {"email":email})
+    return render(request,"jokes.html", {"email":email, "uid":user.id})
 
 def list_Of_Jokes(request):
-    try:
-        request.session['uid']
-    except:
-        return render(request, "error.html")
-    list_jokes = database.child('phrase').get().val()
-    print('phrase')
-    return render(request, "Listofjokes.html", {'phrase':list_jokes})
+
+    list_jokes = supabase.table("phrases").select("*").execute()
+    print(list_jokes.data)
+    return render(request, "Listofjokes.html", {'phrase':list_jokes.data})
