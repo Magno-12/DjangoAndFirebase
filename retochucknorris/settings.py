@@ -27,13 +27,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY', default='your secret key')
 
 
-DATABASES = {
-    'default': dj_database_url.config(
-        engine='django.db.backends.postgresql',
-             default='postgresql://postgres:M1234567891*Magno@db.vjvkzcmihnvzopcxzsme.supabase.co:5432/postgres',
-                     conn_max_age=600
-    )}
-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = 'RENDER' not in os.environ
 
@@ -89,7 +82,12 @@ WSGI_APPLICATION = 'retochucknorris.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-
+DATABASES = {
+    'default': dj_database_url.config(
+        engine='django.db.backends.postgresql',
+             default='postgresql://postgres:M1234567891*Magno@db.vjvkzcmihnvzopcxzsme.supabase.co:5432/postgres',
+                     conn_max_age=600
+    )}
 
 
 
