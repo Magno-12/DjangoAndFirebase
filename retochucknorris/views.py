@@ -49,14 +49,16 @@ def ButtonDelete(request, id):
 
 
 def postsignIn(request):
-    email: str = "magno12.mcmb@gamil.com"
+    email: str = "magno12.mcmb@gmail.com"
     passw: str = "123456789"
     try:
         user = supabase.auth.sign_up(email = email, password=passw)
         print('Value',user.id)
-        return render(request,"jokes.html", {"email":email, "uid":user.id})
+        
     except:
         return render(request,"error.html")
+
+    return render(request,"jokes.html", {"email":email, "uid":user.id})
 
 
 def list_Of_Jokes(request):
