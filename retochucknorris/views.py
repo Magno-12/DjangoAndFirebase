@@ -51,7 +51,10 @@ def ButtonDelete(request, id):
 def postsignIn(request):
     email = request.POST.get('email')
     passw= request.POST.get('password')
-    user = supabase.auth.sign_up(email = email, password=passw)
+    try:
+        user = supabase.auth.sign_up(email = email, password=passw)
+    except:
+        return render(request, "error.html")
     print('Value',user.id)
     return render(request,"jokes.html", {"email":email, "uid":user.id})
 
