@@ -54,13 +54,12 @@ def postsignIn(request):
     try:
         user = supabase.auth.sign_up(email = email, password=passw)
         print('Value',user.id)
-        return render(request,"jokes.html", {"email":email, "uid":user.id})
     except:
-        return render(request,"Login.html")
+        return render(request,"error.html")
+    return render(request,"jokes.html", {"email":email, "uid":user.id})
 
 
 def list_Of_Jokes(request):
-
     list_jokes = supabase.table("phrases").select("*").execute()
     print(list_jokes.data)
     return render(request, "Listofjokes.html", {'phrase':list_jokes.data})
