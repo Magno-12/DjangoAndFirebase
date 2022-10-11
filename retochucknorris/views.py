@@ -60,6 +60,6 @@ def ButtonDelete(request, id):
     return redirect('/list_Of_Jokes')
 
 def list_Of_Jokes(request):
-    list_jokes = supabase.table("phrases").select("*").execute()
+    list_jokes = supabase.table("phrases").select("*").eq("user_id", request.session["uid"]).execute()
     print(list_jokes.data)
     return render(request, "Listofjokes.html", {'phrase':list_jokes.data})
