@@ -7,20 +7,20 @@
 {% block body %}
 {% csrf_token %}
 
+
 <div class="row">
     <div class="col-sm-12 col-md-6 col-lg-8 col-xl-8">
         <centre>
-            <a class="btn btn-info btnEliminacion" href="/button" alt="Get Joke" style="font-size: 1.5em">Get Joke</a>
+            <a class="btn btn-info btnEliminacion" href="/button/" alt="Get Joke" style="font-size: 1.5em">Get Joke</a>
             <hr>
             {{jokes}}
             <hr>
         </centre>
-        <form action="/ButtonFav/{{uid}}" method="post">
+        <form action="/ButtonFav/" method="post">
             <centre>
-                <a class="btn btn-info btnEliminacion" alt="Fav Joke" href="/buttonFav?phrase={{ jokes|urlencode }}&uid={{ uid|urlencode }}"
+                <a class="btn btn-info btnEliminacion" alt="Fav Joke" href="/buttonFav?phrase={{ jokes|urlencode }}"
                     style="font-size: 1.5em">Fav
                     Joke</a>
-                    <hr>
             </centre>
         </form>
     </div>

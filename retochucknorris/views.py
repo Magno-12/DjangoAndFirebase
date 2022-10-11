@@ -22,6 +22,18 @@ supabase: Client = create_client(supabase_url = url, supabase_key = key)
 def signIn(request):
     return render(request,"Login.html")
 
+def postsignIn(request):
+    email = request.POST.get('email')
+    passw= request.POST.get('pass')
+    try:
+        user = supabase.auth.sign_up(email = email, password=passw)
+        request.session["uid"] = str(user.id)
+        return render(request,"jokes.html", {"email":email})
+    except:
+        print("paso aquí chu3rito")
+
+        return render(request, "error.html")
+
 def logout(request):
     try:
         del request.session['uid']
@@ -37,8 +49,8 @@ def button(request):
 
 def buttonFav(request):
     value = request.GET.get("phrase")
-    uid = request.GET.get("uid")
-    supabase.table("phrases").insert({"phrase":value, "user_id":uid}).execute()
+    uid = request.session["uid"]
+    supabase.table("phrases").insert({"phrase":value, 'user_id':uid}).execute()
     return render(request, "jokes.html")
 
 def ButtonDelete(request, id):
@@ -46,17 +58,6 @@ def ButtonDelete(request, id):
     supabase.table("phrases").delete().eq("id",id).execute()
 
     return redirect('/list_Of_Jokes')
-
-
-def postsignIn(request):
-    email = request.POST.get('email')
-    passw= request.POST.get('password')
-    try:
-        user = supabase.auth.sign_up(email = email, password=passw)
-        return render(request,"jokes.html", {"email":email, "uid":user.id})
-    except:
-        return render(request, "error.html")
-
 
 def list_Of_Jokes(request):
     list_jokes = supabase.table("phrases").select("*").execute()
