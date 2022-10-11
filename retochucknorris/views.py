@@ -31,7 +31,6 @@ def postsignIn(request):
         return render(request,"jokes.html", {"email":email})
     except:
         print("paso aquí chu3rito")
-
         return render(request, "error.html")
 
 def logout(request):
