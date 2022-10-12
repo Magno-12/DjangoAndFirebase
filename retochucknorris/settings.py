@@ -29,7 +29,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', default='your secret key')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['https://django-firebase-app-crud.onrender.com','http://0.0.0.0:10000']
 
 RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
 if RENDER_EXTERNAL_HOSTNAME:
@@ -139,4 +139,4 @@ if not DEBUG:    # Tell Django to copy statics to the `staticfiles` directory
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CSRF_TRUSTED_ORIGINS = ['https://djangoandfirebase-production.up.railway.app/']
+CSRF_TRUSTED_ORIGINS = ['https://djangoandfirebase-production.up.railway.app']

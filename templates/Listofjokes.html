@@ -20,11 +20,11 @@
                     <tr>
                         <td>{{p.phrase}}</td>
                         <form action="/ButtonDelete/" method="delete">
+                            {% csrf_token %}
                             <td><a href="/ButtonDelete/{{p.id}}" class="btn btn-danger btnEliminacion">Delete</a>
                             </td>
                     </tr>
                     </form>
-                    {% csrf_token %}
                     {% endfor %}
                 </tbody>
             </table>
