@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'render.apps.RenderConfig',
 ]
 
 MIDDLEWARE = [
@@ -84,10 +85,9 @@ WSGI_APPLICATION = 'retochucknorris.wsgi.application'
 DATABASES = {
     'default': dj_database_url.config(
         engine='django.db.backends.postgresql',
-             default='postgresql://postgres:M1234567891*Magno@db.vjvkzcmihnvzopcxzsme.supabase.co:5432/postgres',
-                     conn_max_age=600
+        default='postgresql://postgres:M1234567891*Magno@db.vjvkzcmihnvzopcxzsme.supabase.co:5432/postgres',
+        conn_max_age=600
     )}
-
 
 
 # Password validation
